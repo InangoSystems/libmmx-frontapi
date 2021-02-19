@@ -83,7 +83,7 @@ endif
 all: $(SOURCES) $(TARGET_SO)
 
 $(TARGET_SO): $(OBJECTS)
-	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
+	$(CC) -Wl,-soname,$@ $(OBJECTS) $(LDFLAGS) -o $@
 
 install: 
 	install -d $(DESTDIR)$(PREFIX)/include
