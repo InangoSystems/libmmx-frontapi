@@ -68,7 +68,7 @@
 #
 ################################################################################
 
-override CC ?= gcc
+CC ?= gcc
 override CFLAGS += -c -fPIC -Wall -std=gnu99
 override LDFLAGS += -shared -fPIC -lmicroxml -ling-gen-utils
 
@@ -76,7 +76,7 @@ SOURCES=$(wildcard *.c)
 OBJECTS=$(SOURCES:.c=.o)
 TARGET_SO=libmmx-frontapi.so
 
-ifeq ($(PREFIX),)
+ifeq ($(strip $(PREFIX)),)
     PREFIX := /usr
 endif
 
