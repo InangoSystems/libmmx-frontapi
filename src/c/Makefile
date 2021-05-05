@@ -68,7 +68,7 @@
 #
 ################################################################################
 
-override CC ?= gcc
+CC ?= gcc
 override CFLAGS += -c -fPIC -Wall -std=gnu99
 override LDFLAGS += -shared -fPIC -lmicroxml -ling-gen-utils
 
@@ -76,14 +76,14 @@ SOURCES=$(wildcard *.c)
 OBJECTS=$(SOURCES:.c=.o)
 TARGET_SO=libmmx-frontapi.so
 
-ifeq ($(PREFIX),)
+ifeq ($(strip $(PREFIX)),)
     PREFIX := /usr
 endif
 
 all: $(SOURCES) $(TARGET_SO)
 
 $(TARGET_SO): $(OBJECTS)
-	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
+	$(CC) -Wl,-soname,$@ $(OBJECTS) $(LDFLAGS) -o $@
 
 install: 
 	install -d $(DESTDIR)$(PREFIX)/include

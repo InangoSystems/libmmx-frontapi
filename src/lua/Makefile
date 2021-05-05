@@ -68,16 +68,18 @@
 #
 ################################################################################
 
-ifeq ($(PREFIX),)
+ifeq ($(strip $(PREFIX)),)
     PREFIX := /usr
 endif
+
+LUAPATH ?= $(PREFIX)/lib/lua
 
 all clean:
 	echo "Nothing to do for $@"
 
 install:
-	install -d $(DESTDIR)$(PREFIX)/lib/lua/mmx
-	install -m 644 *.lua $(DESTDIR)$(PREFIX)/lib/lua/mmx
+	install -d $(DESTDIR)$(LUAPATH)/mmx
+	install -m 644 *.lua $(DESTDIR)$(LUAPATH)/mmx
 
 
 .PHONY: all clean install
